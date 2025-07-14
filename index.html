@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیریت شارژ ساختمان</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4A90E2"/>
+</head>
+<body>
+    <header>
+        <h1>مدیریت شارژ ساختمان</h1>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>مدیریت واحدها</h2>
+            <form id="unit-form">
+                <input type="text" id="unit-number" placeholder="شماره واحد" required>
+                <input type="number" id="unit-area" placeholder="متراژ (متر مربع)" required>
+                <input type="number" id="unit-occupants" placeholder="تعداد نفرات" required>
+                <button type="submit">افزودن واحد</button>
+            </form>
+            <div class="table-container">
+                <table id="units-table">
+                    <thead>
+                        <tr>
+                            <th>واحد</th>
+                            <th>متراژ</th>
+                            <th>نفرات</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>تعریف شارژ ماهانه</h2>
+            <form id="charge-form">
+                <input type="text" id="charge-title" placeholder="عنوان (مثلاً: شارژ تیرماه ۱۴۰۵)" required>
+                <select id="charge-method" required>
+                    <option value="" disabled selected>روش محاسبه</option>
+                    <option value="equal">مساوی برای همه</option>
+                    <option value="by_area">بر اساس متراژ</option>
+                    <option value="by_occupants">بر اساس تعداد نفرات</option>
+                </select>
+                <input type="number" id="charge-base-amount" placeholder="مبلغ پایه (تومان)" required>
+                <button type="submit">اعلام شارژ به همه</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>ثبت پرداخت</h2>
+            <form id="payment-form">
+                <select id="payment-unit-select" required>
+                    <option value="" disabled selected>انتخاب واحد</option>
+                </select>
+                <input type="number" id="payment-amount" placeholder="مبلغ پرداخت (تومان)" required>
+                <input type="date" id="payment-date" required>
+                <button type="submit">ثبت پرداخت</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>گزارش‌ها</h2>
+            <div class="report-section">
+                <h3>لیست بدهکاران</h3>
+                <div class="table-container">
+                    <table id="debtors-table">
+                        <thead>
+                            <tr>
+                                <th>واحد</th>
+                                <th>مبلغ بدهی (تومان)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>مدیریت هزینه‌ها</h2>
+            <form id="expense-form">
+                <input type="text" id="expense-title" placeholder="عنوان هزینه (مثلاً: تعمیر آسانسور)" required>
+                <input type="number" id="expense-amount" placeholder="مبلغ (تومان)" required>
+                <input type="date" id="expense-date" required>
+                <button type="submit">ثبت هزینه</button>
+            </form>
+             <div class="report-section">
+                <h3>وضعیت صندوق</h3>
+                <div id="fund-summary">
+                    <p>کل درآمد: <span id="total-income">۰</span> تومان</p>
+                    <p>کل هزینه: <span id="total-expense">۰</span> تومان</p>
+                    <p>موجودی صندوق: <strong id="fund-balance">۰</strong> تومان</p>
+                </div>
+                <h3>لیست هزینه‌ها</h3>
+                <div class="table-container">
+                    <table id="expenses-table">
+                        <thead>
+                            <tr>
+                                <th>شرح</th>
+                                <th>مبلغ (تومان)</th>
+                                <th>تاریخ</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
