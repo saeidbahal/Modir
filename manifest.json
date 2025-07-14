@@ -1,0 +1,55 @@
+{
+  "name": "مدیریت شارژ ساختمان",
+  "short_name": "شارژ ساختمان",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4A90E2",
+  "description": "اپلیکیشن ساده و آفلاین برای مدیریت شارژ ساختمان.",
+  "icons": [
+    {
+      "src": "https://www.gstatic.com/android/keyboard/emojikit/20181023/mdpi/emoji_u1f3e2.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://www.gstatic.com/android/keyboard/emojikit/20181023/mdpi/emoji_u1f3e2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+۵. فایل sw.js (Service Worker)
+این فایل مسئول ذخیره (کش کردن) فایل‌های اپلیکیشن برای استفاده در حالت آفلاین است.
+const CACHE_NAME = 'building-charge-v1';
+const urlsToCache = [
+  '.',
+  'index.html',
+  'style.css',
+  'script.js'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      }
+    )
+  );
+});
+
